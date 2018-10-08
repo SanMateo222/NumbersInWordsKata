@@ -3,40 +3,41 @@ import java.util.List;
 
 public class NumbersToWordsConverterService {
 
-    //    NumberWords numberWords = new NumberWords();
     private static final Integer FIRST_POSITION = 0;
     private static final Integer SECOND_POSITION = 1;
     private static final Integer THIRD_POSITION = 2;
-    StringBuilder str = new StringBuilder();
 
     public String convertDigitsController(int number) {
+        StringBuilder str = new StringBuilder();
         List<Integer> digits = listOfIntegers(number);
 
         for (int digitPosition = digits.size() - 1; digitPosition >= 0; digitPosition--) {
-            if (digitPosition == SECOND_POSITION) { //currently supports up to 99
-
+            //currently supports up to 99
+            if (digitPosition == SECOND_POSITION) {
                 addDoubleDigitWords(digits, str, digitPosition);
             } else if (digitPosition == FIRST_POSITION) {
-                if (!isZeroAfterSecondDigit(digits, str, digitPosition)) {
-                    addSpacingBetweenWords(digits.size(), str);
-                    str.append(convertSingleDigit(digits.get(digitPosition)));
-                }
+                addSingleDigitWord(str, digits, digitPosition);
             }
         }
         return String.valueOf(str);
     }
 
     public String convertTeenNumbers(int number) {
-
+        StringBuilder str = new StringBuilder();
         str.append(convertTeensDigit(number));
-
         return String.valueOf(str);
+    }
+
+    private void addSingleDigitWord(StringBuilder str, List<Integer> digits, int digitPosition) {
+        if (!isZeroAfterSecondDigit(digits, str, digitPosition)) {
+            addSpacingBetweenWords(digits.size(), str);
+            str.append(convertSingleDigit(digits.get(digitPosition)));
+        }
     }
 
     private void addDoubleDigitWords(List<Integer> digits, StringBuilder str, int digitPosition) {
         str.append(convertDoubleDigit(digits.get(digitPosition)));
     }
-
 
 
     private void addSpacingBetweenWords(int digitsSize, StringBuilder str) {

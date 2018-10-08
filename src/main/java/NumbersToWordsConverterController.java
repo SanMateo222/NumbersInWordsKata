@@ -8,8 +8,6 @@ public class NumbersToWordsConverterController {
 
     public String convertToNumber(int number) {
 
-
-
         if (isTeenNumber(number)) {
             return numbersToWordsConverterService.convertTeenNumbers(number);
         } else {
