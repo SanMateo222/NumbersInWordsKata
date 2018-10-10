@@ -4,7 +4,6 @@ public enum NumberWords {
     DEFAULT,
 
     // 1 - 9
-
     ZERO,
     ONE,
     TWO,
@@ -28,9 +27,7 @@ public enum NumberWords {
     EIGHTEEN,
     NINETEEN,
 
-
     // 20 - 90
-
     TWENTY,
     THIRTY,
     FOURTY,
@@ -43,7 +40,5 @@ public enum NumberWords {
     // 100-999
 
     HUNDRED,
-    HUNDREDS
-
 
 }

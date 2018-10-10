@@ -1,12 +1,26 @@
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
 
+import static junit.framework.TestCase.assertNull;
 import static junit.framework.TestCase.assertTrue;
+import static junit.framework.Assert.fail;
 
 public class NumbersToWordsConverterServiceTest {
-    NumbersToWordsConverterController numberService = new NumbersToWordsConverterController();
+    NumbersToWordsConverterService numberService = new NumbersToWordsConverterService();
 
+
+    @Test
+    public void convertToWords_WhenInput_1000_ThenOutput_isNotSupported() {
+        int number = 1000;
+        assertNull(numberService.convertToNumber(number));
+//        String result = numberService.convertToNumber(number);
+//        assert e
+
+
+//        AssertionError(new Exception("a"));
+    }
     @Test
     public void convertToWords_WhenInput_1_ThenOutput_One() {
         int number = 1;
@@ -87,8 +101,7 @@ public class NumbersToWordsConverterServiceTest {
 
         while (number < 10) {
             String result = numberService.convertToNumber(number);
-//            assert(result.equalsIgnoreCase(listOfOneDigitNumbers.get(number)), "message");
-            assertTrue("failed at number " + number, result.equalsIgnoreCase(listOfOneDigitNumbers.get(number)));
+            assertTrue("failed at number " + number + ", result was " + listOfOneDigitNumbers.get(number), result.equalsIgnoreCase(listOfOneDigitNumbers.get(number)));
             number++;
         }
     }
@@ -109,12 +122,62 @@ public class NumbersToWordsConverterServiceTest {
 
         while (number < 100) {
             String result = numberService.convertToNumber(number);
-            assertTrue("failed at number " + number + ", result was "+ listOfTwoDigitNumbers.get(x),
+            assertTrue("failed at number " + number + ", result was " + listOfTwoDigitNumbers.get(x),
                     result.equalsIgnoreCase(listOfTwoDigitNumbers.get(x)));
             x++;
             number = number + 10;
         }
-
-
     }
+
+    @Test
+    public void convertToWords_WhenInput_TwoDigitWithEnding_ThenOutput_IsCorrect() {
+        int number = 11;
+        ArrayList<String> listOfTwoDigitNumbers = new ArrayList<String>();
+        listOfTwoDigitNumbers.add("eleven");
+        listOfTwoDigitNumbers.add("twenty two");
+        listOfTwoDigitNumbers.add("thirty three");
+        listOfTwoDigitNumbers.add("fourty four");
+        listOfTwoDigitNumbers.add("fifty five");
+        listOfTwoDigitNumbers.add("sixty six");
+        listOfTwoDigitNumbers.add("seventy seven");
+        listOfTwoDigitNumbers.add("eighty eight");
+        listOfTwoDigitNumbers.add("ninety nine");
+        int x = 0;
+
+        while (number < 100) {
+            String result = numberService.convertToNumber(number);
+            assertTrue("failed at number " + number + ", result was " + listOfTwoDigitNumbers.get(x),
+                    result.equalsIgnoreCase(listOfTwoDigitNumbers.get(x)));
+
+                number = number + 11;
+                x++;
+        }
+    }
+
+
+    @Test
+    public void convertToWords_WhenInput_ThreeDigit_ThenOutput_IsCorrect() {
+        int number = 100;
+        ArrayList<String> listOfTwoDigitNumbers = new ArrayList<String>();
+        listOfTwoDigitNumbers.add("one hundred");
+        listOfTwoDigitNumbers.add("one hundred seventy three");
+        listOfTwoDigitNumbers.add("two hundred fourty six");
+        listOfTwoDigitNumbers.add("three hundred nineteen");
+//        listOfTwoDigitNumbers.add("fifty five");
+//        listOfTwoDigitNumbers.add("sixty six");
+//        listOfTwoDigitNumbers.add("seventy seven");
+//        listOfTwoDigitNumbers.add("eighty eight");
+//        listOfTwoDigitNumbers.add("ninety nine");
+        int x = 0;
+
+        while (number < 350) {
+            String result = numberService.convertToNumber(number);
+            assertTrue("failed at number " + number + ", expected " + listOfTwoDigitNumbers.get(x) +", result: "+ result.toString(),
+                    result.equalsIgnoreCase(listOfTwoDigitNumbers.get(x)));
+            number = number + 73;
+            x++;
+        }
+    }
+
+
 }
